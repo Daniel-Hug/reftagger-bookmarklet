@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>bookmarklet: toggle display of bracketed text on a webpage (great for Amplified Bible)</title>
+	<style>
+	html, body {
+		height: 100%;
+		margin: 0 8px;
+		overflow: hidden;
+		font: 18px sans-serif;
+	}
+
+	textarea {
+		box-sizing: border-box;
+		width: 100%;
+		height: 50%;
+		margin: 0;
+	}
+
+	#bookmarklet {
+		cursor: move;
+	}
+	</style>
+</head>
+<body>
+	<h1>Toggle bracketed text on and off</h1>
+	<p>When viewing the <a href="https://www.biblegateway.com/passage/?search=Matthew+5&amp;version=AMP">Amplified Bible (AMP)</a> or the <a href="https://www.biblegateway.com/passage/?search=Matthew+5&amp;version=AMPC">Amplified Bible; Clasic Edition (AMPC)</a> on BibleGateway and other sites it would be convenient to be able to hide and show the text in brackets.</p>
+	<p>I made a bookmarklet for this purpose. To use it, simply drag this link to your bookmarks: <a href="#" id="bookmarklet">toggle brackets</a>. Then, when you're on a website with bracketed text, click the bookmark to toggle the amplified text in brackets on and off.</p>
+	<p>The LORD be with you!<br>
+	-<a href="https://github.com/Daniel-Hug/">Daniel Hug</a></p>
+
+	<textarea id="src-preview"></textarea>
+
+	<script src="node_modules/uglify-js/tmp/uglifyjs.js"></script>
+	<script>
+	(function() {
+		// compress JS from JS panel via closure compiler API
+		// and turn it into a "javascript:" link
+
+		var compressor = UglifyJS.Compressor({
+			negate_iife: false,
+			unsafe: true,
+			warnings: false
+		});
+
+		function uglify(js) {
+			var ast = UglifyJS.parse(js);
+
+			// compress
+			ast.figure_out_scope();
+			ast = ast.transform(compressor);
+
+			// mangle
+			ast.figure_out_scope();
+			ast.mangle_names();
+
+			// convert parse tree to string:
+			return ast.print_to_string();
+		}
+
+
+		// grab elements
+		var bookmarklet = document.getElementById('bookmarklet');
+		var textarea = document.getElementById('src-preview');
+
+		// get bookmarklet src with ajax
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', 'toggle-brackets.js', true);
+
+		// check for reply
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4) {
+				handleSrc(xhr.responseText);
+			}
+		};
+
+		// send request
+		xhr.send();
+
+
+		function handleSrc(bmScript) {
+			// compress bookmarklet script
+			var compressedJS = uglify(bmScript);
+
+			// add script to link and textarea
+			var href = "javascript:" + compressedJS.split('%').join('%25');
+			bookmarklet.href = href;
+			textarea.value = href;
+		}
+	})();
+	</script>
+</body>
+</html>

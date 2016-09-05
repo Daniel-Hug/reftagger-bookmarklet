@@ -1,0 +1,20 @@
+{
+  "name": "toggle-brackets",
+  "version": "0.0.0",
+  "description": "bookmarklet: toggle display of bracketed text on a webpage (great for Amplified Bible)",
+  "main": "toggle-brackets.js",
+  "dependencies": {
+    "findandreplacedomtext": "^0.4.4",
+    "uglify-js": "^2.7.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Daniel-Hug/toggle-brackets.git"
+  },
+  "author": "Daniel Hug",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Daniel-Hug/toggle-brackets/issues"
+  },
+  "homepage": "https://github.com/Daniel-Hug/toggle-brackets#readme"
+}
