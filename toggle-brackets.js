@@ -97,7 +97,8 @@
 
 		// load Github script and start replace: padolsey/findAndReplaceDOMText
 		loadScripts([
-			'https://cdn.rawgit.com/padolsey/findAndReplaceDOMText/master/src/findAndReplaceDOMText.js'
+			// 'https://cdn.rawgit.com/padolsey/findAndReplaceDOMText/master/src/findAndReplaceDOMText.js'
+			'https://daniel-hug.github.io/toggle-brackets/node_modules/findandreplacedomtext/src/findAndReplaceDOMText.js'
 		], replace);
 
 		// CSS will go in <style>
