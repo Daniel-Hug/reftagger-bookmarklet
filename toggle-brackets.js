@@ -70,14 +70,12 @@
 
 			// get all text nodes
 			var textNodes = getTextNodes(document.body);
-			console.log('textNodes: ' + textNodes.length);
 
 			// only include nodes with [ or ]
 			var relevantTextNodes = textNodes.filter(function(node) {
 				return node.textContent.indexOf('[') >= 0 ||
 					node.textContent.indexOf(']') >= 0;
 			});
-			console.log('relevantTextNodes: ' + relevantTextNodes.length);
 
 			// find their nearest parent
 			var textContainer = getNearestAnscestor.apply(null, relevantTextNodes);
