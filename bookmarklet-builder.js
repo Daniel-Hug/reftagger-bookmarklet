@@ -39,6 +39,7 @@
 					var href = this.src.split('{{version}}').join(this.translation);
 
 					link.href = href;
+					link.textContent = link.textContent.split(' ')[0] + ' ' + this.translation;
 					textarea.value = href;
 				};
 			})()
