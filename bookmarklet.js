@@ -8,7 +8,7 @@
 	window.refTagger = {
 		settings: {
 			noSearchTagNames: [],
-			bibleVersion: "ESV"
+			bibleVersion: "{{version}}"
 		}
 	};
 
